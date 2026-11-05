@@ -20,9 +20,16 @@ def home():
     </form>
     """
 
-if __name__ == "__main__":
-    import os
+@app.route("/admin")
+def admin():
+    try:
+        with open("data.txt", "r", encoding="utf-8") as f:
+            data = f.read()
+        return f"<pre>{data}</pre>"
+    except:
+        return "No messages yet"
 
 if __name__ == "__main__":
+    import os
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
